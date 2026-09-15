@@ -1,9 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Atmosphere } from "@/components/Atmosphere";
-import { WatchPanel } from "@/components/WatchPanel";
-import { EpisodeGuide } from "@/components/EpisodeGuide";
 import { PageHeader, Panel, SectionTitle } from "@/components/ui/section";
 import { animeEntries } from "@/lib/rezero-data";
 import { episodesBySeason } from "@/lib/rezero-episodes";
@@ -40,7 +38,7 @@ function AnimePage() {
         <PageHeader
           eyebrow="Anime & films"
           title="Three seasons, two films, one loop"
-          lead="Watch every episode and film right here, and select an entry to shift the archive into its atmosphere."
+          lead="Every entry has its own watch page. Select one to shift the archive into its atmosphere."
         />
 
         <div className="mx-auto max-w-6xl space-y-5 px-5">
@@ -93,17 +91,19 @@ function AnimePage() {
                   {entry.watchNote}
                 </p>
 
-                <WatchPanel
-                  trailerId={entry.trailerId}
-                  fullVideoId={entry.fullVideoId}
-                  links={entry.links}
-                  title={entry.title}
-                />
-
-                <EpisodeGuide
-                  episodes={episodesBySeason[entry.key] ?? []}
-                  seasonTitle={entry.title}
-                />
+                <div className="mt-6 border-t border-border pt-5">
+                  <Link
+                    to="/watch/$key"
+                    params={{ key: entry.key }}
+                    className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-1.5 text-xs text-muted-foreground transition-colors hover:border-primary hover:text-foreground"
+                  >
+                    <span aria-hidden className="text-primary">▶</span>
+                    Watch {entry.title}
+                    {(episodesBySeason[entry.key]?.length ?? 0) > 0
+                      ? ` · ${episodesBySeason[entry.key]!.length} episodes`
+                      : ""}
+                  </Link>
+                </div>
               </Panel>
             );
           })}

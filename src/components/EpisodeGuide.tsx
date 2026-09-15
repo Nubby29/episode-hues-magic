@@ -4,6 +4,7 @@ import type { Episode } from "@/lib/rezero-episodes";
 interface EpisodeGuideProps {
   episodes: Episode[];
   seasonTitle: string;
+  defaultOpen?: boolean;
 }
 
 function formatDate(value?: string) {
@@ -81,8 +82,12 @@ function EpisodePlayer({
   );
 }
 
-export function EpisodeGuide({ episodes, seasonTitle }: EpisodeGuideProps) {
-  const [open, setOpen] = useState(false);
+export function EpisodeGuide({
+  episodes,
+  seasonTitle,
+  defaultOpen = false,
+}: EpisodeGuideProps) {
+  const [open, setOpen] = useState(defaultOpen);
 
   if (episodes.length === 0) return null;
 
