@@ -14,6 +14,8 @@ import { Route as AnimeRouteImport } from './routes/anime'
 import { Route as MangaRouteImport } from './routes/manga'
 import { Route as NovelsRouteImport } from './routes/novels'
 import { Route as WikiRouteImport } from './routes/wiki'
+import { Route as WatchIndexRouteImport } from './routes/watch.index'
+import { Route as WatchKeyRouteImport } from './routes/watch.$key'
 import { Route as WikiIndexRouteImport } from './routes/wiki.index'
 import { Route as WikiSlugRouteImport } from './routes/wiki.$slug'
 
@@ -42,6 +44,16 @@ const WikiRoute = WikiRouteImport.update({
   path: '/wiki',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WatchIndexRoute = WatchIndexRouteImport.update({
+  id: '/watch/',
+  path: '/watch/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WatchKeyRoute = WatchKeyRouteImport.update({
+  id: '/watch/$key',
+  path: '/watch/$key',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WikiIndexRoute = WikiIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -59,7 +71,9 @@ export interface FileRoutesByFullPath {
   '/manga': typeof MangaRoute
   '/novels': typeof NovelsRoute
   '/wiki': typeof WikiRouteWithChildren
+  '/watch/$key': typeof WatchKeyRoute
   '/wiki/$slug': typeof WikiSlugRoute
+  '/watch/': typeof WatchIndexRoute
   '/wiki/': typeof WikiIndexRoute
 }
 export interface FileRoutesByTo {
@@ -67,7 +81,9 @@ export interface FileRoutesByTo {
   '/anime': typeof AnimeRoute
   '/manga': typeof MangaRoute
   '/novels': typeof NovelsRoute
+  '/watch/$key': typeof WatchKeyRoute
   '/wiki/$slug': typeof WikiSlugRoute
+  '/watch': typeof WatchIndexRoute
   '/wiki': typeof WikiIndexRoute
 }
 export interface FileRoutesById {
@@ -77,15 +93,33 @@ export interface FileRoutesById {
   '/manga': typeof MangaRoute
   '/novels': typeof NovelsRoute
   '/wiki': typeof WikiRouteWithChildren
+  '/watch/$key': typeof WatchKeyRoute
   '/wiki/$slug': typeof WikiSlugRoute
+  '/watch/': typeof WatchIndexRoute
   '/wiki/': typeof WikiIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/anime' | '/manga' | '/novels' | '/wiki' | '/wiki/$slug' | '/wiki/'
+    | '/'
+    | '/anime'
+    | '/manga'
+    | '/novels'
+    | '/wiki'
+    | '/watch/$key'
+    | '/wiki/$slug'
+    | '/watch/'
+    | '/wiki/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/anime' | '/manga' | '/novels' | '/wiki/$slug' | '/wiki'
+  to:
+    | '/'
+    | '/anime'
+    | '/manga'
+    | '/novels'
+    | '/watch/$key'
+    | '/wiki/$slug'
+    | '/watch'
+    | '/wiki'
   id:
     | '__root__'
     | '/'
@@ -93,7 +127,9 @@ export interface FileRouteTypes {
     | '/manga'
     | '/novels'
     | '/wiki'
+    | '/watch/$key'
     | '/wiki/$slug'
+    | '/watch/'
     | '/wiki/'
   fileRoutesById: FileRoutesById
 }
@@ -103,6 +139,8 @@ export interface RootRouteChildren {
   MangaRoute: typeof MangaRoute
   NovelsRoute: typeof NovelsRoute
   WikiRoute: typeof WikiRouteWithChildren
+  WatchKeyRoute: typeof WatchKeyRoute
+  WatchIndexRoute: typeof WatchIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -142,6 +180,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WikiRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/watch/': {
+      id: '/watch/'
+      path: '/watch'
+      fullPath: '/watch/'
+      preLoaderRoute: typeof WatchIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/watch/$key': {
+      id: '/watch/$key'
+      path: '/watch/$key'
+      fullPath: '/watch/$key'
+      preLoaderRoute: typeof WatchKeyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/wiki/': {
       id: '/wiki/'
       path: '/'
@@ -177,6 +229,8 @@ const rootRouteChildren: RootRouteChildren = {
   MangaRoute: MangaRoute,
   NovelsRoute: NovelsRoute,
   WikiRoute: WikiRouteWithChildren,
+  WatchKeyRoute: WatchKeyRoute,
+  WatchIndexRoute: WatchIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
