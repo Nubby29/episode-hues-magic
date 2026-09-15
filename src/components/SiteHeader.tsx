@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 const nav = [
   { to: "/", label: "Home" },
   { to: "/anime", label: "Anime & Films" },
+  { to: "/watch", label: "Watch" },
   { to: "/novels", label: "Novels" },
   { to: "/manga", label: "Manga" },
   { to: "/wiki", label: "Wiki" },
