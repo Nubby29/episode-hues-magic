@@ -10,33 +10,99 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AnimeRouteImport } from './routes/anime'
+import { Route as MangaRouteImport } from './routes/manga'
+import { Route as NovelsRouteImport } from './routes/novels'
+import { Route as WikiRouteImport } from './routes/wiki'
+import { Route as WikiIndexRouteImport } from './routes/wiki.index'
+import { Route as WikiSlugRouteImport } from './routes/wiki.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AnimeRoute = AnimeRouteImport.update({
+  id: '/anime',
+  path: '/anime',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MangaRoute = MangaRouteImport.update({
+  id: '/manga',
+  path: '/manga',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NovelsRoute = NovelsRouteImport.update({
+  id: '/novels',
+  path: '/novels',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WikiRoute = WikiRouteImport.update({
+  id: '/wiki',
+  path: '/wiki',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WikiIndexRoute = WikiIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => WikiRoute,
+} as any)
+const WikiSlugRoute = WikiSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => WikiRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/anime': typeof AnimeRoute
+  '/manga': typeof MangaRoute
+  '/novels': typeof NovelsRoute
+  '/wiki': typeof WikiRouteWithChildren
+  '/wiki/$slug': typeof WikiSlugRoute
+  '/wiki/': typeof WikiIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/anime': typeof AnimeRoute
+  '/manga': typeof MangaRoute
+  '/novels': typeof NovelsRoute
+  '/wiki/$slug': typeof WikiSlugRoute
+  '/wiki': typeof WikiIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/anime': typeof AnimeRoute
+  '/manga': typeof MangaRoute
+  '/novels': typeof NovelsRoute
+  '/wiki': typeof WikiRouteWithChildren
+  '/wiki/$slug': typeof WikiSlugRoute
+  '/wiki/': typeof WikiIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    '/' | '/anime' | '/manga' | '/novels' | '/wiki' | '/wiki/$slug' | '/wiki/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/anime' | '/manga' | '/novels' | '/wiki/$slug' | '/wiki'
+  id:
+    | '__root__'
+    | '/'
+    | '/anime'
+    | '/manga'
+    | '/novels'
+    | '/wiki'
+    | '/wiki/$slug'
+    | '/wiki/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AnimeRoute: typeof AnimeRoute
+  MangaRoute: typeof MangaRoute
+  NovelsRoute: typeof NovelsRoute
+  WikiRoute: typeof WikiRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +114,69 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/anime': {
+      id: '/anime'
+      path: '/anime'
+      fullPath: '/anime'
+      preLoaderRoute: typeof AnimeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/manga': {
+      id: '/manga'
+      path: '/manga'
+      fullPath: '/manga'
+      preLoaderRoute: typeof MangaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/novels': {
+      id: '/novels'
+      path: '/novels'
+      fullPath: '/novels'
+      preLoaderRoute: typeof NovelsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/wiki': {
+      id: '/wiki'
+      path: '/wiki'
+      fullPath: '/wiki'
+      preLoaderRoute: typeof WikiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/wiki/': {
+      id: '/wiki/'
+      path: '/'
+      fullPath: '/wiki/'
+      preLoaderRoute: typeof WikiIndexRouteImport
+      parentRoute: typeof WikiRoute
+    }
+    '/wiki/$slug': {
+      id: '/wiki/$slug'
+      path: '/$slug'
+      fullPath: '/wiki/$slug'
+      preLoaderRoute: typeof WikiSlugRouteImport
+      parentRoute: typeof WikiRoute
+    }
   }
 }
 
+interface WikiRouteChildren {
+  WikiSlugRoute: typeof WikiSlugRoute
+  WikiIndexRoute: typeof WikiIndexRoute
+}
+
+const WikiRouteChildren: WikiRouteChildren = {
+  WikiSlugRoute: WikiSlugRoute,
+  WikiIndexRoute: WikiIndexRoute,
+}
+
+const WikiRouteWithChildren = WikiRoute._addFileChildren(WikiRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AnimeRoute: AnimeRoute,
+  MangaRoute: MangaRoute,
+  NovelsRoute: NovelsRoute,
+  WikiRoute: WikiRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
