@@ -3,22 +3,25 @@ import type { SourceLink } from "@/lib/rezero-data";
 
 interface WatchPanelProps {
   trailerId?: string | undefined;
+  fullVideoId?: string | undefined;
   links: SourceLink[];
   title: string;
 }
 
-export function WatchPanel({ trailerId, links, title }: WatchPanelProps) {
+export function WatchPanel({ trailerId, fullVideoId, links, title }: WatchPanelProps) {
   const [playing, setPlaying] = useState(false);
+  const videoId = fullVideoId ?? trailerId;
+  const isFull = Boolean(fullVideoId);
 
   return (
     <div className="mt-6 space-y-4">
-      {trailerId ? (
+      {videoId ? (
         playing ? (
           <div className="aspect-video w-full overflow-hidden rounded-lg border border-border">
             <iframe
-              src={`https://www.youtube-nocookie.com/embed/${trailerId}?autoplay=1`}
-              title={`${title} — official trailer`}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`}
+              title={isFull ? `${title} — full film` : `${title} — official trailer`}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
               allowFullScreen
               className="h-full w-full"
             />
@@ -30,7 +33,9 @@ export function WatchPanel({ trailerId, links, title }: WatchPanelProps) {
             className="flex w-full items-center justify-center gap-3 rounded-lg border border-border bg-secondary/60 px-4 py-8 text-sm text-muted-foreground transition-colors hover:border-primary hover:text-foreground"
           >
             <span aria-hidden className="text-primary">▶</span>
-            Play the official trailer — streamed from YouTube
+            {isFull
+              ? "Play the full film — English subtitled, from Muse Asia"
+              : "Play the official trailer — streamed from YouTube"}
           </button>
         )
       ) : null}
