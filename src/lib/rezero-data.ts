@@ -17,6 +17,8 @@ export interface AnimeEntry {
   watchNote: string;
   /** Official YouTube video ID (Crunchyroll / Kadokawa), embedded lazily. */
   trailerId?: string;
+  /** Official Muse Asia full-film video ID. */
+  fullVideoId?: string;
   links: SourceLink[];
 }
 
@@ -76,6 +78,7 @@ export const animeEntries: AnimeEntry[] = [
     synopsis:
       "A warm, comedic breather in a snowbound village: a botched investigation, a village of suspicious children, and a night of quiet gratitude between Subaru and the people he saved.",
     watchNote: "Optional in plot terms, essential in tone.",
+    fullVideoId: "szvKTRxLMxk",
     links: [
       { label: "Watch on Crunchyroll", url: "https://www.crunchyroll.com/series/GRGG9798R", free: true },
     ],
@@ -90,6 +93,7 @@ export const animeEntries: AnimeEntry[] = [
     synopsis:
       "Emilia's story before Subaru: a half-elf girl waking in a frozen forest, and the contract with a cat-shaped spirit named Puck that gave her a name to hold on to.",
     watchNote: "Best watched right before Season 2.",
+    fullVideoId: "hOvCHC-w3tQ",
     links: [
       { label: "Watch on Crunchyroll", url: "https://www.crunchyroll.com/series/GRGG9798R", free: true },
     ],
