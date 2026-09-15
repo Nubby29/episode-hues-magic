@@ -13,6 +13,7 @@ export interface SeasonTheme {
   subtitle: string;
   years: string;
   atmosphere: string;
+  poster: string;
   /** CSS custom property overrides applied to the themed wrapper. */
   vars: Record<string, string>;
 }
@@ -25,6 +26,7 @@ export const themes: SeasonTheme[] = [
     subtitle: "The Kingdom of Lugunica",
     years: "2016",
     atmosphere: "Lantern-lit capital streets, mansion candlelight, endless loops.",
+    poster: "/posters/season1.jpg",
     vars: {
       "--background": "oklch(0.17 0.03 268)",
       "--foreground": "oklch(0.95 0.01 250)",
@@ -54,6 +56,7 @@ export const themes: SeasonTheme[] = [
     subtitle: "Sanctuary",
     years: "2020 – 2021",
     atmosphere: "Fog between the trees, greenhouse glass, the Witch's tea table.",
+    poster: "/posters/season2.jpg",
     vars: {
       "--background": "oklch(0.16 0.025 175)",
       "--foreground": "oklch(0.95 0.015 160)",
@@ -83,6 +86,7 @@ export const themes: SeasonTheme[] = [
     subtitle: "Priestella",
     years: "2024 – 2025",
     atmosphere: "Water city canals at dusk, cathedral spires, Sin Archbishops.",
+    poster: "/posters/season3.jpg",
     vars: {
       "--background": "oklch(0.15 0.035 285)",
       "--foreground": "oklch(0.95 0.012 280)",
@@ -112,6 +116,7 @@ export const themes: SeasonTheme[] = [
     subtitle: "Pleiades Watchtower",
     years: "2026",
     atmosphere: "Augria sand dunes, shimmering starlight, the tower of the sage.",
+    poster: "/posters/season4.jpg",
     vars: {
       "--background": "oklch(0.14 0.035 250)",
       "--foreground": "oklch(0.96 0.012 240)",
@@ -141,6 +146,7 @@ export const themes: SeasonTheme[] = [
     subtitle: "OVA Film",
     years: "2018",
     atmosphere: "Warm village snowfall, steam baths, gentle mischief.",
+    poster: "/posters/memory-snow.jpg",
     vars: {
       "--background": "oklch(0.96 0.012 250)",
       "--foreground": "oklch(0.24 0.04 265)",
@@ -170,6 +176,7 @@ export const themes: SeasonTheme[] = [
     subtitle: "OVA Film",
     years: "2019",
     atmosphere: "Elior Forest ice, a spirit's promise, pale blue silence.",
+    poster: "/posters/frozen-bond.jpg",
     vars: {
       "--background": "oklch(0.19 0.03 232)",
       "--foreground": "oklch(0.96 0.012 220)",

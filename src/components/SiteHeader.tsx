@@ -104,23 +104,35 @@ export function SiteHeader() {
 
                 {/* TAB 1: Atmosphere Selection */}
                 <TabsContent value="atmosphere" className="space-y-4 pt-3">
-                  {/* Current Active Atmosphere Banner */}
+                  {/* Current Active Atmosphere Banner with Poster Thumbnail */}
                   <div className="flex items-center justify-between rounded-xl border border-primary/40 bg-primary/10 p-3">
-                    <div className="space-y-0.5">
-                      <div className="flex items-center gap-2">
-                        <span className="text-[10px] uppercase font-bold tracking-widest text-primary">
-                          Active Theme
-                        </span>
-                        <Badge variant="outline" className="border-primary/50 text-[10px] text-foreground">
-                          {theme.years}
-                        </Badge>
+                    <div className="flex items-center gap-3">
+                      <div className="relative aspect-[2/3] w-12 shrink-0 overflow-hidden rounded-lg border border-primary/40 shadow-sm">
+                        <img
+                          src={theme.poster}
+                          alt={`${theme.name} active poster`}
+                          className="h-full w-full object-cover object-center"
+                        />
                       </div>
-                      <p className="font-display text-sm text-foreground">
-                        {theme.name} <span className="text-primary font-normal">• {theme.subtitle}</span>
-                      </p>
+                      <div className="space-y-0.5">
+                        <div className="flex items-center gap-2">
+                          <span className="text-[10px] uppercase font-bold tracking-widest text-primary">
+                            Active Theme
+                          </span>
+                          <Badge variant="outline" className="border-primary/50 text-[10px] text-foreground">
+                            {theme.years}
+                          </Badge>
+                        </div>
+                        <p className="font-display text-sm text-foreground">
+                          {theme.name} <span className="text-primary font-normal">• {theme.subtitle}</span>
+                        </p>
+                        <p className="text-xs text-muted-foreground line-clamp-1">
+                          {theme.atmosphere}
+                        </p>
+                      </div>
                     </div>
 
-                    <div className="flex items-center gap-1.5">
+                    <div className="flex items-center gap-1.5 pl-2">
                       {Object.values(theme.vars)
                         .slice(0, 1)
                         .concat([theme.vars["--primary"]!, theme.vars["--accent"]!])
@@ -134,7 +146,7 @@ export function SiteHeader() {
                     </div>
                   </div>
 
-                  {/* Atmosphere Grid List */}
+                  {/* Atmosphere Grid List with Poster Thumbnails */}
                   <div className="space-y-2">
                     <div className="flex items-center justify-between text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">
                       <span>Select Preset</span>
@@ -156,45 +168,44 @@ export function SiteHeader() {
                               setThemeKey(t.key);
                             }}
                             className={cn(
-                              "flex items-center justify-between rounded-xl border p-3 text-left transition-all duration-200",
+                              "flex items-center justify-between rounded-xl border p-2.5 text-left transition-all duration-200",
                               isActive
                                 ? "border-primary bg-primary/15 shadow-sm ring-1 ring-primary/40"
                                 : "border-border/60 bg-background/40 hover:border-border hover:bg-background/80",
                             )}
                           >
-                            <div className="space-y-1">
-                              <div className="flex items-center gap-2">
-                                <div className="flex items-center gap-1 shrink-0">
-                                  {Object.values(t.vars)
-                                    .slice(0, 1)
-                                    .concat([t.vars["--primary"]!, t.vars["--accent"]!])
-                                    .map((c, i) => (
-                                      <span
-                                        key={i}
-                                        className="h-2.5 w-2.5 rounded-full border border-border"
-                                        style={{ background: c }}
-                                      />
-                                    ))}
-                                </div>
-                                <span
-                                  className={cn(
-                                    "text-sm font-medium",
-                                    isActive ? "text-primary" : "text-foreground",
-                                  )}
-                                >
-                                  {t.name}
-                                </span>
-                                <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                                  • {t.subtitle}
-                                </span>
+                            <div className="flex items-center gap-3 min-w-0">
+                              {/* 44x66 (2:3) Poster thumbnail */}
+                              <div className="relative aspect-[2/3] w-11 shrink-0 overflow-hidden rounded-md border border-border/60 shadow-sm">
+                                <img
+                                  src={t.poster}
+                                  alt={`${t.name} preset`}
+                                  className="h-full w-full object-cover object-center"
+                                />
                               </div>
-                              <p className="text-xs text-muted-foreground line-clamp-1">
-                                {t.atmosphere}
-                              </p>
+
+                              <div className="min-w-0 space-y-0.5">
+                                <div className="flex items-center gap-2">
+                                  <span
+                                    className={cn(
+                                      "text-sm font-medium",
+                                      isActive ? "text-primary" : "text-foreground",
+                                    )}
+                                  >
+                                    {t.name}
+                                  </span>
+                                  <span className="text-[10px] uppercase tracking-wider text-muted-foreground truncate">
+                                    • {t.subtitle}
+                                  </span>
+                                </div>
+                                <p className="text-xs text-muted-foreground line-clamp-1">
+                                  {t.atmosphere}
+                                </p>
+                              </div>
                             </div>
 
                             {isActive && (
-                              <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-sm">
+                              <div className="ml-2 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-sm">
                                 <Check className="h-3.5 w-3.5" />
                               </div>
                             )}
