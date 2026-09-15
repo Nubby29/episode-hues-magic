@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useSeasonTheme } from "@/lib/theme-context";
 import { themes } from "@/lib/theme-data";
 import { cn } from "@/lib/utils";
+import { Sparkles } from "lucide-react";
 
 const nav = [
   { to: "/", label: "Home" },
@@ -14,7 +15,7 @@ const nav = [
 ] as const;
 
 export function SiteHeader() {
-  const { themeKey, setThemeKey, theme } = useSeasonTheme();
+  const { themeKey, setThemeKey, theme, autoTheme, setAutoTheme } = useSeasonTheme();
   const [open, setOpen] = useState(false);
 
   return (
@@ -93,6 +94,29 @@ export function SiteHeader() {
           <span className="hidden text-xs text-muted-foreground lg:inline">
             — {theme.subtitle}
           </span>
+
+          {/* Global Auto-Theme Setting Toggle */}
+          <div className="ml-auto flex items-center gap-1.5">
+            <button
+              type="button"
+              onClick={() => setAutoTheme(!autoTheme)}
+              title={
+                autoTheme
+                  ? "Auto-atmosphere is ON: changes theme to match current season/movie. Click to disable."
+                  : "Auto-atmosphere is OFF: keeps your chosen theme. Click to enable auto-switch."
+              }
+              aria-pressed={autoTheme}
+              className={cn(
+                "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-[11px] font-medium transition-colors",
+                autoTheme
+                  ? "border-primary/60 bg-primary/10 text-primary hover:bg-primary/20"
+                  : "border-border bg-secondary/40 text-muted-foreground hover:text-foreground hover:bg-secondary/70",
+              )}
+            >
+              <Sparkles className={cn("h-3 w-3", autoTheme ? "text-primary" : "text-muted-foreground")} />
+              <span>Auto-theme: {autoTheme ? "On" : "Off"}</span>
+            </button>
+          </div>
         </div>
       </div>
     </header>

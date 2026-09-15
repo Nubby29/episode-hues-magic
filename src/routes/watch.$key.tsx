@@ -1,4 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { useEffect } from "react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Atmosphere } from "@/components/Atmosphere";
@@ -7,8 +8,9 @@ import { SeasonPlayer } from "@/components/SeasonPlayer";
 import { PageHeader, Panel, SectionTitle } from "@/components/ui/section";
 import { animeEntries } from "@/lib/rezero-data";
 import { episodesBySeason } from "@/lib/rezero-episodes";
+import { useSeasonTheme } from "@/lib/theme-context";
 import type { ThemeKey } from "@/lib/theme-data";
-import { Film, Tv, Sparkles, ChevronRight } from "lucide-react";
+import { Film, Tv, ChevronRight } from "lucide-react";
 
 export const Route = createFileRoute("/watch/$key")({
   loader: ({ params }) => {
@@ -67,6 +69,14 @@ function WatchNotFound() {
 function WatchEntryPage() {
   const { key } = Route.useParams();
   const entry = animeEntries.find((e) => e.key === (key as ThemeKey));
+  const { syncThemeIfEnabled } = useSeasonTheme();
+
+  useEffect(() => {
+    if (entry?.key) {
+      syncThemeIfEnabled(entry.key);
+    }
+  }, [entry?.key, syncThemeIfEnabled]);
+
   if (!entry) return <WatchNotFound />;
 
   const episodes = episodesBySeason[entry.key] ?? [];
