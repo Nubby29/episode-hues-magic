@@ -3,7 +3,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Atmosphere } from "@/components/Atmosphere";
 import { WatchPanel } from "@/components/WatchPanel";
-import { EpisodeGuide } from "@/components/EpisodeGuide";
+import { SeasonPlayer } from "@/components/SeasonPlayer";
 import { PageHeader, Panel, SectionTitle } from "@/components/ui/section";
 import { animeEntries } from "@/lib/rezero-data";
 import { episodesBySeason } from "@/lib/rezero-episodes";
@@ -89,41 +89,50 @@ function WatchEntryPage() {
             ← All seasons and films
           </Link>
 
-          <Panel>
-            <SectionTitle>
-              {entry.fullVideoId ? "Watch the film" : "Trailer and links"}
-            </SectionTitle>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {entry.arcs.map((arc) => (
-                <span
-                  key={arc}
-                  className="rounded-full bg-secondary px-3 py-1 text-xs text-secondary-foreground"
-                >
-                  {arc}
-                </span>
-              ))}
-            </div>
-            <p className="mt-4 text-sm italic text-muted-foreground">
-              {entry.watchNote}
-            </p>
-            <WatchPanel
-              trailerId={entry.trailerId}
-              fullVideoId={entry.fullVideoId}
-              links={entry.links}
-              title={entry.title}
-            />
-          </Panel>
-
           {episodes.length > 0 ? (
             <Panel>
-              <SectionTitle>Episodes</SectionTitle>
-              <EpisodeGuide
-                episodes={episodes}
-                seasonTitle={entry.title}
-                defaultOpen
+              <SectionTitle>Watch {entry.title}</SectionTitle>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {entry.arcs.map((arc) => (
+                  <span
+                    key={arc}
+                    className="rounded-full bg-secondary px-3 py-1 text-xs text-secondary-foreground"
+                  >
+                    {arc}
+                  </span>
+                ))}
+              </div>
+              <p className="mt-4 text-sm italic text-muted-foreground">
+                {entry.watchNote}
+              </p>
+              <div className="mt-5">
+                <SeasonPlayer episodes={episodes} seasonTitle={entry.title} />
+              </div>
+            </Panel>
+          ) : (
+            <Panel>
+              <SectionTitle>Watch the film</SectionTitle>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {entry.arcs.map((arc) => (
+                  <span
+                    key={arc}
+                    className="rounded-full bg-secondary px-3 py-1 text-xs text-secondary-foreground"
+                  >
+                    {arc}
+                  </span>
+                ))}
+              </div>
+              <p className="mt-4 text-sm italic text-muted-foreground">
+                {entry.watchNote}
+              </p>
+              <WatchPanel
+                trailerId={entry.trailerId}
+                fullVideoId={entry.fullVideoId}
+                links={entry.links}
+                title={entry.title}
               />
             </Panel>
-          ) : null}
+          )}
         </div>
       </main>
       <SiteFooter />
