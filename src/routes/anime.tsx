@@ -4,7 +4,6 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { Atmosphere } from "@/components/Atmosphere";
 import { WatchPanel } from "@/components/WatchPanel";
 import { EpisodeGuide } from "@/components/EpisodeGuide";
-import { SeriesPlayer } from "@/components/SeriesPlayer";
 import { PageHeader, Panel, SectionTitle } from "@/components/ui/section";
 import { animeEntries } from "@/lib/rezero-data";
 import { episodesBySeason } from "@/lib/rezero-episodes";
@@ -41,15 +40,8 @@ function AnimePage() {
         <PageHeader
           eyebrow="Anime & films"
           title="Three seasons, two films, one loop"
-          lead="Select any entry below to shift the archive into its atmosphere."
+          lead="Watch every episode and film right here, and select an entry to shift the archive into its atmosphere."
         />
-
-        <section className="mx-auto mb-12 max-w-6xl px-5">
-          <SectionTitle>Watch here</SectionTitle>
-          <div className="mt-6">
-            <SeriesPlayer />
-          </div>
-        </section>
 
         <div className="mx-auto max-w-6xl space-y-5 px-5">
           {animeEntries.map((entry) => {
@@ -103,6 +95,7 @@ function AnimePage() {
 
                 <WatchPanel
                   trailerId={entry.trailerId}
+                  fullVideoId={entry.fullVideoId}
                   links={entry.links}
                   title={entry.title}
                 />
