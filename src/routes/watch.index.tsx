@@ -13,7 +13,7 @@ export const Route = createFileRoute("/watch/")({
       {
         name: "description",
         content:
-          "Pick a Re:Zero season or film and watch it on its own page: Season 1, Season 2, Season 3, Memory Snow and The Frozen Bond.",
+          "Pick a Re:Zero season or film and watch it on its own page: Season 1, Season 2, Season 3, Season 4, Memory Snow and The Frozen Bond.",
       },
       { property: "og:title", content: "Watch Re:Zero — Seasons and Films" },
       {

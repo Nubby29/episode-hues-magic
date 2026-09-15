@@ -2,6 +2,7 @@ export type ThemeKey =
   | "season1"
   | "season2"
   | "season3"
+  | "season4"
   | "memory-snow"
   | "frozen-bond";
 
@@ -102,6 +103,35 @@ export const themes: SeasonTheme[] = [
       "--ring": "oklch(0.66 0.19 12)",
       "--sigil": "oklch(0.66 0.19 12)",
       "--halo": "oklch(0.7 0.13 210)",
+    },
+  },
+  {
+    key: "season4",
+    name: "Season 4",
+    kind: "series",
+    subtitle: "Pleiades Watchtower",
+    years: "2026",
+    atmosphere: "Augria sand dunes, shimmering starlight, the tower of the sage.",
+    vars: {
+      "--background": "oklch(0.14 0.035 250)",
+      "--foreground": "oklch(0.96 0.012 240)",
+      "--card": "oklch(0.20 0.04 250)",
+      "--card-foreground": "oklch(0.96 0.012 240)",
+      "--popover": "oklch(0.20 0.04 250)",
+      "--popover-foreground": "oklch(0.96 0.012 240)",
+      "--primary": "oklch(0.75 0.16 85)",
+      "--primary-foreground": "oklch(0.15 0.04 250)",
+      "--secondary": "oklch(0.25 0.045 250)",
+      "--secondary-foreground": "oklch(0.96 0.012 240)",
+      "--muted": "oklch(0.24 0.04 250)",
+      "--muted-foreground": "oklch(0.76 0.03 245)",
+      "--accent": "oklch(0.70 0.18 200)",
+      "--accent-foreground": "oklch(0.15 0.04 250)",
+      "--border": "oklch(0.75 0.14 85 / 25%)",
+      "--input": "oklch(0.75 0.14 85 / 25%)",
+      "--ring": "oklch(0.75 0.16 85)",
+      "--sigil": "oklch(0.75 0.16 85)",
+      "--halo": "oklch(0.70 0.18 200)",
     },
   },
   {

@@ -69,6 +69,21 @@ export const animeEntries: AnimeEntry[] = [
     ],
   },
   {
+    key: "season4",
+    title: "Re:Zero Season 4",
+    format: "TV series",
+    episodes: "14 episodes",
+    aired: "April 2026 – present",
+    arcs: ["Arc 6: Corridor of Memories"],
+    synopsis:
+      "To restore the memories consumed by the Sin Archbishop of Gluttony, Subaru and Emilia embark across the perilous Augria Sand Dunes to seek the legendary Pleiades Watchtower and the Sage Shaula.",
+    watchNote: "Follows immediately after the climax of Season 3.",
+    trailerId: "PikHDHoVHQ4",
+    links: [
+      { label: "Watch on Crunchyroll", url: "https://www.crunchyroll.com/series/GRGG9798R", free: true },
+    ],
+  },
+  {
     key: "memory-snow",
     title: "Re:Zero — Memory Snow",
     format: "OVA film",

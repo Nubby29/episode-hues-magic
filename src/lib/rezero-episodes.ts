@@ -90,4 +90,118 @@ export const episodesBySeason: Partial<Record<ThemeKey, Episode[]>> = {
     { number: 15, title: "A Hideous Dinner Party", airdate: "2025-03-19", summary: "While battling Lye Batenkaitos, Otto discovers the secret to the Sin Archbishop's power.", previewQuery: "Re:Zero Season 3 Episode 15 preview", videoIds: ["N7b1VQL9fBs"] },
     { number: 16, title: "The Result of the Battle for Pristella", airdate: "2025-03-26", summary: "Otto and Beatrice battle Gluttony, the last of the Sin Archbishops terrorizing Priestella.", previewQuery: "Re:Zero Season 3 Episode 16 preview", videoIds: ["nseZ-6J8KGY"] },
   ],
+  season4: [
+    {
+      number: 1,
+      title: "The Reason I'm Taking You With Me / Gorgeous Tiger Reloaded",
+      airdate: "2026-04-08",
+      summary: "Following the Battle of Priestella, Julius' name was consumed by Gluttony, leaving him forgotten by everyone besides Subaru. To cure Julius and the comatose victims, Subaru and Emilia resolve to travel across the Augria Sand Dunes to the Pleiades Watchtower.",
+      previewQuery: "Re:Zero Season 4 Episode 1 preview",
+      videoIds: ["PikHDHoVHQ4"]
+    },
+    {
+      number: 2,
+      title: "Overcome Sand Time",
+      airdate: "2026-04-15",
+      summary: "The group traverses the treacherous Augria Sand Dunes, contending with spatial distortions and fierce mabeasts as they draw nearer to the fabled monolith.",
+      previewQuery: "Re:Zero Season 4 Episode 2 preview",
+      videoIds: ["-YvOXX1r_sY"]
+    },
+    {
+      number: 3,
+      title: "The Keeper of the Watchtower",
+      airdate: "2026-04-22",
+      summary: "Subaru and his companions reach the foot of the Pleiades Watchtower and encounter the eccentric Sage, Shaula, who exuberantly welcomes Subaru as her long-lost master.",
+      previewQuery: "Re:Zero Season 4 Episode 3 preview",
+      videoIds: ["X-I-OCDz0PA"]
+    },
+    {
+      number: 4,
+      title: "A White Sky Asterism",
+      airdate: "2026-04-29",
+      summary: "Shaula explains the three rules of the watchtower and the trials required to ascend to the higher levels, testing both intellect and resolve.",
+      previewQuery: "Re:Zero Season 4 Episode 4 preview",
+      videoIds: ["WGL4sfC7IaM"]
+    },
+    {
+      number: 5,
+      title: "Stick Swinger",
+      airdate: "2026-05-06",
+      summary: "The party undertakes the trial on the second tier, facing the manifestation of the first generation Sword Saint, Reid Astrea, whose sheer martial prowess overwhelms them.",
+      previewQuery: "Re:Zero Season 4 Episode 5 preview",
+      videoIds: ["J5y6-bpdxrA"]
+    },
+    {
+      number: 6,
+      title: "Julius Juukulius",
+      airdate: "2026-05-13",
+      summary: "Julius steps forward to duel Reid Astrea, grappling with his lost identity and striving to prove his knightly spirit even when no one remembers his past achievements.",
+      previewQuery: "Re:Zero Season 4 Episode 6 preview",
+      videoIds: ["t_MtW5_plyw"]
+    },
+    {
+      number: 7,
+      title: "Walking Out of the Convenience Store and into a Wondrous World",
+      airdate: "2026-05-20",
+      summary: "Subaru encounters the Taygeta Library within the watchtower, discovering the Books of the Dead that record the memories of the deceased.",
+      previewQuery: "Re:Zero Season 4 Episode 7 preview",
+      videoIds: ["CiVVOfy9Hb8"]
+    },
+    {
+      number: 8,
+      title: "Who Are You?",
+      airdate: "2026-05-27",
+      summary: "After reading an unexpected book, Subaru awakes to discover that his memories since arriving in this fantasy world have vanished, plunging him into utter confusion and paranoia.",
+      previewQuery: "Re:Zero Season 4 Episode 8 preview",
+      videoIds: ["Tg-Z2A6sxjQ"]
+    },
+    {
+      number: 9,
+      title: "Empty Shell",
+      airdate: "2026-06-03",
+      summary: "Distrustful of everyone around him, an amnesiac Subaru attempts to navigate the deadly tower while keeping his condition hidden from Emilia and Beatrice.",
+      previewQuery: "Re:Zero Season 4 Episode 9 preview",
+      videoIds: ["vHSc-PT_EkU"]
+    },
+    {
+      number: 10,
+      title: "Murder Is a Habit",
+      airdate: "2026-06-10",
+      summary: "A gruesome tragedy unfolds within the watchtower as an unseen killer strikes, forcing Subaru through terrifying loops in an environment he no longer understands.",
+      previewQuery: "Re:Zero Season 4 Episode 10 preview",
+      videoIds: ["tuFgbFrQAXU"]
+    },
+    {
+      number: 11,
+      title: "Re:ZERO -Starting Life in Another World-",
+      airdate: "2026-06-17",
+      summary: "Subaru confronts the corridor of memories, rediscovering the weight of his bonds, the sacrifices of his allies, and the true meaning of his identity.",
+      previewQuery: "Re:Zero Season 4 Episode 11 preview",
+      videoIds: ["K4ntccTF2f8"]
+    },
+    {
+      number: 12,
+      title: "From Now On",
+      airdate: "2026-08-12",
+      summary: "With renewed clarity and resolve, Subaru and the camp regroup to tackle the unresolved trials and coordinate an assault on the tower's remaining obstacles.",
+      previewQuery: "Re:Zero Season 4 Episode 12 preview",
+      videoIds: ["kh5cknpEcwI"]
+    },
+    {
+      number: 13,
+      title: "Stand Up",
+      airdate: "2026-08-19",
+      summary: "Subaru delves into Reid's Book of the Dead in search of tactical insight, while Julius and the others prepare for their decisive rematch against the insurmountable swordsman.",
+      previewQuery: "Re:Zero Season 4 Episode 13 preview",
+      videoIds: ["XxW1Lg1V4-A"]
+    },
+    {
+      number: 14,
+      title: "Five Obstacles",
+      airdate: "2026-08-26",
+      summary: "Returning from the corridor of memories, Subaru finds the watchtower beleaguered by deadly mabeasts and sinister forces converging from every direction.",
+      previewQuery: "Re:Zero Season 4 Episode 14 preview",
+      videoIds: ["JjBuZAF4KN0"]
+    },
+  ],
 };
