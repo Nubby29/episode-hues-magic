@@ -17,6 +17,7 @@ import {
 
 const STORAGE_KEY = "rezero-theme";
 const AUTO_THEME_STORAGE_KEY = "rezero-auto-theme";
+const HERO_AUTO_CYCLE_STORAGE_KEY = "rezero-hero-auto-cycle";
 
 interface ThemeContextValue {
   theme: SeasonTheme;
@@ -25,6 +26,8 @@ interface ThemeContextValue {
   autoTheme: boolean;
   setAutoTheme: (enabled: boolean) => void;
   syncThemeIfEnabled: (key: ThemeKey) => void;
+  heroAutoCycle: boolean;
+  setHeroAutoCycle: (enabled: boolean) => void;
 }
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
@@ -32,6 +35,7 @@ const ThemeContext = createContext<ThemeContextValue | null>(null);
 export function SeasonThemeProvider({ children }: { children: ReactNode }) {
   const [themeKey, setKey] = useState<ThemeKey>(defaultThemeKey);
   const [autoTheme, setAuto] = useState<boolean>(true);
+  const [heroAutoCycle, setHeroAutoCycleState] = useState<boolean>(true);
 
   useEffect(() => {
     try {
@@ -42,6 +46,10 @@ export function SeasonThemeProvider({ children }: { children: ReactNode }) {
       const storedAuto = window.localStorage.getItem(AUTO_THEME_STORAGE_KEY);
       if (storedAuto !== null) {
         setAuto(storedAuto === "true");
+      }
+      const storedHeroAuto = window.localStorage.getItem(HERO_AUTO_CYCLE_STORAGE_KEY);
+      if (storedHeroAuto !== null) {
+        setHeroAutoCycleState(storedHeroAuto === "true");
       }
     } catch {
       /* storage unavailable */
@@ -66,6 +74,15 @@ export function SeasonThemeProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
+  const setHeroAutoCycle = useCallback((enabled: boolean) => {
+    setHeroAutoCycleState(enabled);
+    try {
+      window.localStorage.setItem(HERO_AUTO_CYCLE_STORAGE_KEY, String(enabled));
+    } catch {
+      /* storage unavailable */
+    }
+  }, []);
+
   const syncThemeIfEnabled = useCallback(
     (key: ThemeKey) => {
       if (!autoTheme) return;
@@ -85,8 +102,19 @@ export function SeasonThemeProvider({ children }: { children: ReactNode }) {
       autoTheme,
       setAutoTheme,
       syncThemeIfEnabled,
+      heroAutoCycle,
+      setHeroAutoCycle,
     }),
-    [theme, themeKey, setThemeKey, autoTheme, setAutoTheme, syncThemeIfEnabled],
+    [
+      theme,
+      themeKey,
+      setThemeKey,
+      autoTheme,
+      setAutoTheme,
+      syncThemeIfEnabled,
+      heroAutoCycle,
+      setHeroAutoCycle,
+    ],
   );
 
   return (
@@ -109,6 +137,8 @@ const defaultContextValue: ThemeContextValue = {
   autoTheme: true,
   setAutoTheme: () => {},
   syncThemeIfEnabled: () => {},
+  heroAutoCycle: true,
+  setHeroAutoCycle: () => {},
 };
 
 export function useSeasonTheme() {

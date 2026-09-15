@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Atmosphere } from "@/components/Atmosphere";
@@ -7,7 +7,7 @@ import { Panel, SectionTitle } from "@/components/ui/section";
 import { useSeasonTheme } from "@/lib/theme-context";
 import { themes } from "@/lib/theme-data";
 import { animeEntries, wikiEntries } from "@/lib/rezero-data";
-import { ChevronLeft, ChevronRight, Play, Pause } from "lucide-react";
+import { ChevronLeft, ChevronRight, Play } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -32,16 +32,16 @@ export const Route = createFileRoute("/")({
 const ROTATION_INTERVAL_MS = 7000;
 
 function Home() {
-  const { theme, themeKey, setThemeKey } = useSeasonTheme();
-  const [isPaused, setIsPaused] = useState(false);
+  const { theme, themeKey, setThemeKey, heroAutoCycle } = useSeasonTheme();
+  const [isHovered, setIsHovered] = useState(false);
   const current = animeEntries.find((a) => a.key === theme.key) ?? animeEntries[0];
   const featured = wikiEntries.filter((e) =>
     ["subaru-natsuki", "emilia", "return-by-death", "witch-of-envy"].includes(e.slug),
   );
 
-  // Automatic rotation on landing page only
+  // Automatic rotation on landing page only, enabled by default, configurable in Settings
   useEffect(() => {
-    if (isPaused) return;
+    if (!heroAutoCycle || isHovered) return;
 
     const timer = setInterval(() => {
       const currentIndex = themes.findIndex((t) => t.key === themeKey);
@@ -50,7 +50,7 @@ function Home() {
     }, ROTATION_INTERVAL_MS);
 
     return () => clearInterval(timer);
-  }, [themeKey, isPaused, setThemeKey]);
+  }, [themeKey, heroAutoCycle, isHovered, setThemeKey]);
 
   const handlePrev = () => {
     const currentIndex = themes.findIndex((t) => t.key === themeKey);
@@ -70,40 +70,17 @@ function Home() {
       <SiteHeader />
 
       <main className="relative z-10">
-        {/* Auto-switching Hero with Atmosphere Sync */}
+        {/* Cinematic Hero with Atmosphere Sync */}
         <section
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
           className="group relative mx-auto max-w-6xl px-5 pb-16 pt-16 sm:pt-24 transition-all duration-700"
         >
-          {/* Status pill & timer badge */}
-          <div className="flex flex-wrap items-center gap-3">
+          {/* Status badge */}
+          <div className="flex items-center gap-3">
             <span className="text-[11px] font-bold uppercase tracking-[0.34em] text-primary transition-colors duration-500">
               {theme.kind === "film" ? "Now viewing film" : "Now viewing"} · {theme.years}
             </span>
-
-            {/* Subtle auto-play indicator */}
-            <button
-              type="button"
-              onClick={() => setIsPaused((p) => !p)}
-              className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-secondary/40 px-2.5 py-0.5 text-[10px] text-muted-foreground hover:border-primary/50 hover:text-foreground transition-colors"
-              title={isPaused ? "Auto-switch paused (click to resume)" : "Auto-switching every 7s (click to pause)"}
-            >
-              {isPaused ? (
-                <>
-                  <Play className="h-2.5 w-2.5 text-primary" />
-                  <span>Paused</span>
-                </>
-              ) : (
-                <>
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-                  </span>
-                  <span>Auto-cycling</span>
-                </>
-              )}
-            </button>
           </div>
 
           {/* Hero Titles with smooth key transition */}
@@ -278,7 +255,7 @@ function ThemeCard({ themeKey }: { themeKey: (typeof themes)[number]["key"] }) {
       onClick={() => setThemeKey(t.key)}
       className={`rounded-xl border p-5 text-left transition-all duration-300 ${
         isActive
-          ? "border-primary bg-card"
+          ? "border-primary bg-card shadow-sm ring-1 ring-primary/40"
           : "border-border bg-card/50 hover:-translate-y-1 hover:bg-card"
       }`}
     >
