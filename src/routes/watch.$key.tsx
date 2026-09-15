@@ -3,9 +3,9 @@ import { useEffect } from "react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Atmosphere } from "@/components/Atmosphere";
-import { WatchPanel } from "@/components/WatchPanel";
 import { SeasonPlayer } from "@/components/SeasonPlayer";
-import { PageHeader, Panel, SectionTitle } from "@/components/ui/section";
+import { MoviePlayer } from "@/components/MoviePlayer";
+import { PageHeader } from "@/components/ui/section";
 import { animeEntries } from "@/lib/rezero-data";
 import { episodesBySeason } from "@/lib/rezero-episodes";
 import { useSeasonTheme } from "@/lib/theme-context";
@@ -32,7 +32,7 @@ export const Route = createFileRoute("/watch/$key")({
     return {
       meta: [
         { title },
-        { name: "description", content: description },
+        { name: "description", description },
         { property: "og:title", content: title },
         { property: "og:description", content: description },
         { property: "og:type", content: "video.tv_show" },
@@ -173,28 +173,7 @@ function WatchEntryPage() {
           {episodes.length > 0 ? (
             <SeasonPlayer episodes={episodes} seasonTitle={entry.title} />
           ) : (
-            <Panel>
-              <SectionTitle>Watch the film</SectionTitle>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {entry.arcs.map((arc) => (
-                  <span
-                    key={arc}
-                    className="rounded-full bg-secondary px-3 py-1 text-xs text-secondary-foreground"
-                  >
-                    {arc}
-                  </span>
-                ))}
-              </div>
-              <p className="mt-4 text-sm italic text-muted-foreground">
-                {entry.watchNote}
-              </p>
-              <WatchPanel
-                trailerId={entry.trailerId}
-                fullVideoId={entry.fullVideoId}
-                links={entry.links}
-                title={entry.title}
-              />
-            </Panel>
+            <MoviePlayer entry={entry} />
           )}
         </section>
       </main>

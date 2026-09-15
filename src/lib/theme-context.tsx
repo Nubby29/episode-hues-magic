@@ -102,8 +102,16 @@ export function SeasonThemeProvider({ children }: { children: ReactNode }) {
   );
 }
 
+const defaultContextValue: ThemeContextValue = {
+  theme: themeMap[defaultThemeKey],
+  themeKey: defaultThemeKey,
+  setThemeKey: () => {},
+  autoTheme: true,
+  setAutoTheme: () => {},
+  syncThemeIfEnabled: () => {},
+};
+
 export function useSeasonTheme() {
   const ctx = useContext(ThemeContext);
-  if (!ctx) throw new Error("useSeasonTheme must be used inside SeasonThemeProvider");
-  return ctx;
+  return ctx ?? defaultContextValue;
 }
