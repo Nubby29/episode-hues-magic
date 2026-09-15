@@ -152,8 +152,25 @@ export const CANON_ARCS: ArcMeta[] = [
     summary:
       "The Royal Selection convenes in the capital. Shattered by pride and abandonment, Subaru hits his lowest abyss, makes his legendary confession with Rem from zero, hunts the White Whale, and confronts Petelgeuse Romanee-Conti.",
     keyThemes: ["Royal Selection", "From Zero", "White Whale conquest", "Sloth Archbishop confrontation"],
-    totalChapters: 203,
-    chapters: [],
+    totalChapters: 16
+    chapters: [
+      { id: "arc-3-chapter-1", arcId: "arc-3", chapterNumber: 1, title: "Chapter 1: Quiet Early Morning", hasLocalContent: true, externalUrl: "https://kagurojp.wordpress.com/2016/05/31/vol-3-ch-1-quiet-early-morning/" },
+      { id: "arc-3-chapter-2", arcId: "arc-3", chapterNumber: 2, title: "Chapter 2: A Servant’s Tea-Time Conversation", hasLocalContent: true, externalUrl: "https://kagurojp.wordpress.com/2016/06/01/vol-3-ch-2-a-servants-tea-time-conversation/" },
+      { id: "arc-3-chapter-3", arcId: "arc-3", chapterNumber: 3, title: "Chapter 3: Planning a Trip to the Capital", hasLocalContent: true, externalUrl: "https://kagurojp.wordpress.com/2016/06/06/vol-3-ch-3-planning-a-trip-to-the-capital/" },
+      { id: "arc-3-chapter-4", arcId: "arc-3", chapterNumber: 4, title: "Chapter 4: A Trip’s Departure, Many Difficulties Lay Ahead", hasLocalContent: true, externalUrl: "https://kagurojp.wordpress.com/2016/06/09/vol-3-ch-4-a-trips-departure-many-difficulties-lay-ahead/" },
+      { id: "arc-3-chapter-5", arcId: "arc-3", chapterNumber: 5, title: "Chapter 5: Time to Fulfill a Promise", hasLocalContent: true, externalUrl: "https://kagurojp.wordpress.com/2016/06/14/vol-3-ch-5-time-to-fulfill-a-promise/" },
+      { id: "arc-3-chapter-6", arcId: "arc-3", chapterNumber: 6, title: "Chapter 6: A Dangerous Pair", hasLocalContent: true, externalUrl: "https://kagurojp.wordpress.com/2016/06/23/vol-3-ch-6-a-dangerous-pair/" },
+      { id: "arc-3-chapter-7", arcId: "arc-3", chapterNumber: 7, title: "Chapter 7: Orange-Colored Girl", hasLocalContent: true, externalUrl: "https://kagurojp.wordpress.com/2016/06/30/vol-3-ch-7-orange-colored-girl/" },
+      { id: "arc-3-chapter-8", arcId: "arc-3", chapterNumber: 8, title: "Chapter 8: The Result of Gambling", hasLocalContent: true, externalUrl: "https://kagurojp.wordpress.com/2016/07/14/vol-3-ch-8-the-result-of-gambling/" },
+      { id: "arc-3-chapter-9", arcId: "arc-3", chapterNumber: 9, title: "Chapter 9: Divine Protection and Reunion and Promise", hasLocalContent: true, externalUrl: "https://kagurojp.wordpress.com/2016/07/14/vol-3-ch-9-divine-protection-and-reunion-and-promise/" },
+      { id: "arc-3-chapter-10", arcId: "arc-3", chapterNumber: 10, title: "Chapter 10: Confluence and Farewell", hasLocalContent: true, externalUrl: "https://kagurojp.wordpress.com/2016/08/12/vol-3-ch-10-confluence-and-farewell/" },
+      { id: "arc-3-chapter-11", arcId: "arc-3", chapterNumber: 11, title: "Chapter 11: Three Heads are Better Than One, for Sinister Schemes", hasLocalContent: true, externalUrl: "https://kagurojp.wordpress.com/2016/08/12/vol-3-ch-11-three-heads-are-better-than-one-for-sinister-schemes/" },
+      { id: "arc-3-chapter-12", arcId: "arc-3", chapterNumber: 12, title: "Chapter 12: Secret Castle Infiltration and Its Results", hasLocalContent: true, externalUrl: "https://kagurojp.wordpress.com/2016/08/21/vol-3-ch-12-secret-castle-infiltration-and-the-results/" },
+      { id: "arc-3-chapter-13", arcId: "arc-3", chapterNumber: 13, title: "Chapter 13: Same Hometown", hasLocalContent: true, externalUrl: "https://witchculttranslation.com/2025/06/25/arc-3-chapter-13-same-hometown/" },
+      { id: "arc-3-chapter-14", arcId: "arc-3", chapterNumber: 14, title: "Interlude I: The Dragon Carriage", subtitle: "Post-Anime Interlude I", hasLocalContent: true, externalUrl: "https://witchculttranslation.com/table-of-content/" },
+      { id: "arc-3-chapter-15", arcId: "arc-3", chapterNumber: 15, title: "Interlude II: Let’s Eat", subtitle: "Post-Anime Interlude II", hasLocalContent: true, externalUrl: "https://translationchicken.com/2016/09/12/rezero-arc-3-interlude-ii-lets-eat-12/" },
+      { id: "arc-3-chapter-16", arcId: "arc-3", chapterNumber: 16, title: "Interlude III: To Each Their Oath", subtitle: "Post-Anime Interlude III", hasLocalContent: true, externalUrl: "https://translationchicken.com/2016/09/17/rezero-arc-3-interlude-iii-to-each-their-oaths16/" },
+    ],
   },
   {
     id: "arc-4",
