@@ -1,0 +1,171 @@
+export type ThemeKey =
+  | "season1"
+  | "season2"
+  | "season3"
+  | "memory-snow"
+  | "frozen-bond";
+
+export interface SeasonTheme {
+  key: ThemeKey;
+  name: string;
+  kind: "series" | "film";
+  subtitle: string;
+  years: string;
+  atmosphere: string;
+  /** CSS custom property overrides applied to the themed wrapper. */
+  vars: Record<string, string>;
+}
+
+export const themes: SeasonTheme[] = [
+  {
+    key: "season1",
+    name: "Season 1",
+    kind: "series",
+    subtitle: "The Kingdom of Lugunica",
+    years: "2016",
+    atmosphere: "Lantern-lit capital streets, mansion candlelight, endless loops.",
+    vars: {
+      "--background": "oklch(0.17 0.03 268)",
+      "--foreground": "oklch(0.95 0.01 250)",
+      "--card": "oklch(0.23 0.035 267)",
+      "--card-foreground": "oklch(0.95 0.01 250)",
+      "--popover": "oklch(0.23 0.035 267)",
+      "--popover-foreground": "oklch(0.95 0.01 250)",
+      "--primary": "oklch(0.72 0.15 78)",
+      "--primary-foreground": "oklch(0.19 0.03 268)",
+      "--secondary": "oklch(0.28 0.04 268)",
+      "--secondary-foreground": "oklch(0.95 0.01 250)",
+      "--muted": "oklch(0.27 0.035 268)",
+      "--muted-foreground": "oklch(0.75 0.03 262)",
+      "--accent": "oklch(0.62 0.18 25)",
+      "--accent-foreground": "oklch(0.97 0.01 250)",
+      "--border": "oklch(0.82 0.09 80 / 22%)",
+      "--input": "oklch(0.82 0.09 80 / 22%)",
+      "--ring": "oklch(0.72 0.15 78)",
+      "--sigil": "oklch(0.62 0.18 25)",
+      "--halo": "oklch(0.72 0.15 78)",
+    },
+  },
+  {
+    key: "season2",
+    name: "Season 2",
+    kind: "series",
+    subtitle: "Sanctuary",
+    years: "2020 – 2021",
+    atmosphere: "Fog between the trees, greenhouse glass, the Witch's tea table.",
+    vars: {
+      "--background": "oklch(0.16 0.025 175)",
+      "--foreground": "oklch(0.95 0.015 160)",
+      "--card": "oklch(0.22 0.03 174)",
+      "--card-foreground": "oklch(0.95 0.015 160)",
+      "--popover": "oklch(0.22 0.03 174)",
+      "--popover-foreground": "oklch(0.95 0.015 160)",
+      "--primary": "oklch(0.72 0.11 165)",
+      "--primary-foreground": "oklch(0.17 0.03 175)",
+      "--secondary": "oklch(0.27 0.035 174)",
+      "--secondary-foreground": "oklch(0.95 0.015 160)",
+      "--muted": "oklch(0.26 0.03 174)",
+      "--muted-foreground": "oklch(0.76 0.03 168)",
+      "--accent": "oklch(0.58 0.14 300)",
+      "--accent-foreground": "oklch(0.97 0.01 300)",
+      "--border": "oklch(0.75 0.08 165 / 22%)",
+      "--input": "oklch(0.75 0.08 165 / 22%)",
+      "--ring": "oklch(0.72 0.11 165)",
+      "--sigil": "oklch(0.58 0.14 300)",
+      "--halo": "oklch(0.72 0.11 165)",
+    },
+  },
+  {
+    key: "season3",
+    name: "Season 3",
+    kind: "series",
+    subtitle: "Priestella",
+    years: "2024 – 2025",
+    atmosphere: "Water city canals at dusk, cathedral spires, Sin Archbishops.",
+    vars: {
+      "--background": "oklch(0.15 0.035 285)",
+      "--foreground": "oklch(0.95 0.012 280)",
+      "--card": "oklch(0.21 0.045 288)",
+      "--card-foreground": "oklch(0.95 0.012 280)",
+      "--popover": "oklch(0.21 0.045 288)",
+      "--popover-foreground": "oklch(0.95 0.012 280)",
+      "--primary": "oklch(0.66 0.19 12)",
+      "--primary-foreground": "oklch(0.97 0.01 12)",
+      "--secondary": "oklch(0.26 0.05 288)",
+      "--secondary-foreground": "oklch(0.95 0.012 280)",
+      "--muted": "oklch(0.25 0.045 288)",
+      "--muted-foreground": "oklch(0.76 0.035 285)",
+      "--accent": "oklch(0.7 0.13 210)",
+      "--accent-foreground": "oklch(0.16 0.035 285)",
+      "--border": "oklch(0.7 0.12 12 / 25%)",
+      "--input": "oklch(0.7 0.12 12 / 25%)",
+      "--ring": "oklch(0.66 0.19 12)",
+      "--sigil": "oklch(0.66 0.19 12)",
+      "--halo": "oklch(0.7 0.13 210)",
+    },
+  },
+  {
+    key: "memory-snow",
+    name: "Memory Snow",
+    kind: "film",
+    subtitle: "OVA Film",
+    years: "2018",
+    atmosphere: "Warm village snowfall, steam baths, gentle mischief.",
+    vars: {
+      "--background": "oklch(0.96 0.012 250)",
+      "--foreground": "oklch(0.24 0.04 265)",
+      "--card": "oklch(0.99 0.006 250)",
+      "--card-foreground": "oklch(0.24 0.04 265)",
+      "--popover": "oklch(0.99 0.006 250)",
+      "--popover-foreground": "oklch(0.24 0.04 265)",
+      "--primary": "oklch(0.6 0.13 250)",
+      "--primary-foreground": "oklch(0.99 0.005 250)",
+      "--secondary": "oklch(0.92 0.018 250)",
+      "--secondary-foreground": "oklch(0.28 0.04 265)",
+      "--muted": "oklch(0.93 0.015 250)",
+      "--muted-foreground": "oklch(0.48 0.035 262)",
+      "--accent": "oklch(0.74 0.11 45)",
+      "--accent-foreground": "oklch(0.24 0.05 45)",
+      "--border": "oklch(0.55 0.08 250 / 22%)",
+      "--input": "oklch(0.55 0.08 250 / 22%)",
+      "--ring": "oklch(0.6 0.13 250)",
+      "--sigil": "oklch(0.74 0.11 45)",
+      "--halo": "oklch(0.6 0.13 250)",
+    },
+  },
+  {
+    key: "frozen-bond",
+    name: "Frozen Bond",
+    kind: "film",
+    subtitle: "OVA Film",
+    years: "2019",
+    atmosphere: "Elior Forest ice, a spirit's promise, pale blue silence.",
+    vars: {
+      "--background": "oklch(0.19 0.03 232)",
+      "--foreground": "oklch(0.96 0.012 220)",
+      "--card": "oklch(0.25 0.038 232)",
+      "--card-foreground": "oklch(0.96 0.012 220)",
+      "--popover": "oklch(0.25 0.038 232)",
+      "--popover-foreground": "oklch(0.96 0.012 220)",
+      "--primary": "oklch(0.79 0.11 205)",
+      "--primary-foreground": "oklch(0.2 0.03 232)",
+      "--secondary": "oklch(0.3 0.04 232)",
+      "--secondary-foreground": "oklch(0.96 0.012 220)",
+      "--muted": "oklch(0.29 0.035 232)",
+      "--muted-foreground": "oklch(0.79 0.03 224)",
+      "--accent": "oklch(0.85 0.07 180)",
+      "--accent-foreground": "oklch(0.2 0.03 232)",
+      "--border": "oklch(0.85 0.07 205 / 26%)",
+      "--input": "oklch(0.85 0.07 205 / 26%)",
+      "--ring": "oklch(0.79 0.11 205)",
+      "--sigil": "oklch(0.85 0.07 180)",
+      "--halo": "oklch(0.79 0.11 205)",
+    },
+  },
+];
+
+export const themeMap = Object.fromEntries(
+  themes.map((t) => [t.key, t]),
+) as Record<ThemeKey, SeasonTheme>;
+
+export const defaultThemeKey: ThemeKey = "season1";
