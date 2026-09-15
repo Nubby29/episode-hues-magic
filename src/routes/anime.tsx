@@ -3,8 +3,10 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Atmosphere } from "@/components/Atmosphere";
 import { WatchPanel } from "@/components/WatchPanel";
+import { EpisodeGuide } from "@/components/EpisodeGuide";
 import { PageHeader, Panel, SectionTitle } from "@/components/ui/section";
 import { animeEntries } from "@/lib/rezero-data";
+import { episodesBySeason } from "@/lib/rezero-episodes";
 import { useSeasonTheme } from "@/lib/theme-context";
 
 export const Route = createFileRoute("/anime")({
@@ -95,6 +97,11 @@ function AnimePage() {
                   trailerId={entry.trailerId}
                   links={entry.links}
                   title={entry.title}
+                />
+
+                <EpisodeGuide
+                  episodes={episodesBySeason[entry.key] ?? []}
+                  seasonTitle={entry.title}
                 />
               </Panel>
             );
