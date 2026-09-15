@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState, useEffect, useRef } from "react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Atmosphere } from "@/components/Atmosphere";
@@ -6,6 +7,7 @@ import { Panel, SectionTitle } from "@/components/ui/section";
 import { useSeasonTheme } from "@/lib/theme-context";
 import { themes } from "@/lib/theme-data";
 import { animeEntries, wikiEntries } from "@/lib/rezero-data";
+import { ChevronLeft, ChevronRight, Play, Pause } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -27,12 +29,40 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
+const ROTATION_INTERVAL_MS = 7000;
+
 function Home() {
-  const { theme } = useSeasonTheme();
-  const current = animeEntries.find((a) => a.key === theme.key)!;
+  const { theme, themeKey, setThemeKey } = useSeasonTheme();
+  const [isPaused, setIsPaused] = useState(false);
+  const current = animeEntries.find((a) => a.key === theme.key) ?? animeEntries[0];
   const featured = wikiEntries.filter((e) =>
     ["subaru-natsuki", "emilia", "return-by-death", "witch-of-envy"].includes(e.slug),
   );
+
+  // Automatic rotation on landing page only
+  useEffect(() => {
+    if (isPaused) return;
+
+    const timer = setInterval(() => {
+      const currentIndex = themes.findIndex((t) => t.key === themeKey);
+      const nextIndex = (currentIndex + 1) % themes.length;
+      setThemeKey(themes[nextIndex].key);
+    }, ROTATION_INTERVAL_MS);
+
+    return () => clearInterval(timer);
+  }, [themeKey, isPaused, setThemeKey]);
+
+  const handlePrev = () => {
+    const currentIndex = themes.findIndex((t) => t.key === themeKey);
+    const prevIndex = (currentIndex - 1 + themes.length) % themes.length;
+    setThemeKey(themes[prevIndex].key);
+  };
+
+  const handleNext = () => {
+    const currentIndex = themes.findIndex((t) => t.key === themeKey);
+    const nextIndex = (currentIndex + 1) % themes.length;
+    setThemeKey(themes[nextIndex].key);
+  };
 
   return (
     <>
@@ -40,36 +70,125 @@ function Home() {
       <SiteHeader />
 
       <main className="relative z-10">
-        <section className="mx-auto max-w-6xl px-5 pb-16 pt-20 sm:pt-28">
-          <p className="text-[11px] uppercase tracking-[0.34em] text-primary">
-            {theme.kind === "film" ? "Now viewing film" : "Now viewing"} · {theme.years}
-          </p>
-          <h1 className="font-display mt-5 max-w-3xl text-4xl leading-[1.1] text-foreground sm:text-6xl">
-            {theme.name}
-            <span className="block text-primary">{theme.subtitle}</span>
-          </h1>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-            {theme.atmosphere}
-          </p>
-          <p className="mt-4 max-w-2xl leading-relaxed text-foreground/80">
-            {current.synopsis}
-          </p>
-          <div className="mt-9 flex flex-wrap gap-3">
+        {/* Auto-switching Hero with Atmosphere Sync */}
+        <section
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          className="group relative mx-auto max-w-6xl px-5 pb-16 pt-16 sm:pt-24 transition-all duration-700"
+        >
+          {/* Status pill & timer badge */}
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="text-[11px] font-bold uppercase tracking-[0.34em] text-primary transition-colors duration-500">
+              {theme.kind === "film" ? "Now viewing film" : "Now viewing"} · {theme.years}
+            </span>
+
+            {/* Subtle auto-play indicator */}
+            <button
+              type="button"
+              onClick={() => setIsPaused((p) => !p)}
+              className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-secondary/40 px-2.5 py-0.5 text-[10px] text-muted-foreground hover:border-primary/50 hover:text-foreground transition-colors"
+              title={isPaused ? "Auto-switch paused (click to resume)" : "Auto-switching every 7s (click to pause)"}
+            >
+              {isPaused ? (
+                <>
+                  <Play className="h-2.5 w-2.5 text-primary" />
+                  <span>Paused</span>
+                </>
+              ) : (
+                <>
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                  </span>
+                  <span>Auto-cycling</span>
+                </>
+              )}
+            </button>
+          </div>
+
+          {/* Hero Titles with smooth key transition */}
+          <div key={theme.key} className="animate-in fade-in duration-700">
+            <h1 className="font-display mt-5 max-w-3xl text-4xl leading-[1.1] text-foreground sm:text-6xl">
+              {theme.name}
+              <span className="block text-primary transition-colors duration-700">{theme.subtitle}</span>
+            </h1>
+
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground transition-colors duration-500">
+              {theme.atmosphere}
+            </p>
+
+            <p className="mt-4 max-w-2xl leading-relaxed text-foreground/80 line-clamp-3 sm:line-clamp-none">
+              {current.synopsis}
+            </p>
+          </div>
+
+          {/* Actions & Navigation Controls */}
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <Link
+              to="/watch/$key"
+              params={{ key: theme.key }}
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground shadow-md shadow-primary/20 transition-all hover:opacity-90 active:scale-95"
+            >
+              <Play className="h-4 w-4 fill-current" />
+              <span>Watch {theme.name}</span>
+            </Link>
+
             <Link
               to="/anime"
-              className="rounded-full bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+              className="rounded-full border border-border bg-card/60 px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:border-primary hover:bg-secondary"
             >
               Watch order &amp; arcs
             </Link>
+
             <Link
               to="/wiki"
-              className="rounded-full border border-border px-6 py-2.5 text-sm text-foreground transition-colors hover:bg-secondary"
+              className="rounded-full border border-border px-5 py-2.5 text-sm text-muted-foreground transition-colors hover:border-border hover:bg-secondary hover:text-foreground"
             >
               Enter the wiki
             </Link>
+
+            {/* Quick Prev / Next switcher arrows */}
+            <div className="ml-auto flex items-center gap-1.5 pt-2 sm:pt-0">
+              <button
+                type="button"
+                onClick={handlePrev}
+                aria-label="Previous theme"
+                className="rounded-full border border-border bg-card/60 p-2 text-muted-foreground transition-colors hover:border-primary hover:text-foreground active:scale-95"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+              <button
+                type="button"
+                onClick={handleNext}
+                aria-label="Next theme"
+                className="rounded-full border border-border bg-card/60 p-2 text-muted-foreground transition-colors hover:border-primary hover:text-foreground active:scale-95"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+
+          {/* Carousel Dot Indicators */}
+          <div className="mt-8 flex items-center gap-2">
+            {themes.map((t) => {
+              const active = t.key === themeKey;
+              return (
+                <button
+                  key={t.key}
+                  type="button"
+                  onClick={() => setThemeKey(t.key)}
+                  className={`group relative h-2 rounded-full transition-all duration-300 ${
+                    active ? "w-8 bg-primary" : "w-2 bg-border hover:bg-muted-foreground/60"
+                  }`}
+                  aria-label={`Switch to ${t.name}`}
+                  title={`${t.name} (${t.subtitle})`}
+                />
+              );
+            })}
           </div>
         </section>
 
+        {/* Manual Atmosphere Selection Grid */}
         <section className="mx-auto max-w-6xl px-5 py-10">
           <SectionTitle>Shift the atmosphere</SectionTitle>
           <p className="mt-3 max-w-2xl text-muted-foreground">
@@ -83,6 +202,7 @@ function Home() {
           </div>
         </section>
 
+        {/* Four Ways In */}
         <section className="mx-auto max-w-6xl px-5 py-14">
           <SectionTitle>Four ways in</SectionTitle>
           <div className="mt-7 grid gap-4 md:grid-cols-2">
@@ -90,7 +210,7 @@ function Home() {
               {
                 to: "/anime" as const,
                 title: "Anime & films",
-                text: "Three seasons, two OVA films, and where each one sits in the story.",
+                text: "Four seasons, two OVA films, and where each one sits in the story.",
               },
               {
                 to: "/novels" as const,
@@ -121,6 +241,7 @@ function Home() {
           </div>
         </section>
 
+        {/* Featured Wiki Entries */}
         <section className="mx-auto max-w-6xl px-5 py-10">
           <SectionTitle>Start with these</SectionTitle>
           <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
